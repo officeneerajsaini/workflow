@@ -1,0 +1,45 @@
+name: PR Title Check
+
+on:
+  pull_request:
+    types: [opened, reopened, synchronize]
+
+jobs:
+  check-title:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Install required tools (optional)
+        run: |
+          sudo apt update && sudo apt install -y ripgrep  # Example: ripgrep
+
+      - name: Validate PR title with regex
+        run: |
+          title=$GITHUB_EVENT.pull_request.title
+          regex="^(feat|fix|docs)-\d+:(.*)$"  # Replace with your desired regex pattern
+          if [[ ! $(echo "$title" =~ $regex) ]]; then
+            echo "Hey there! Thanks for your PR, but the title doesn't quite meet our quality checks ️‍♀️"
+            echo "**Wait a minute!** Have you reviewed our awesome contribution guidelines?  (They're super helpful!)"
+            echo "Unfortunately, your current title doesn't follow the required format. Here's what it should look like:"
+            echo "```"
+            echo "fix-#124: Added responsiveness to the Home page screen"  # Example
+            echo "```"
+            echo "Give it another shot with the proper format, and I'll be happy to reopen the PR for you. "
+            echo ""
+            echo "P.S. Remember, keep it clear and concise! "
+            exit 1  # Exit with non-zero code to close the PR
+          fi
+
+      - name: Close PR (if title doesn't match regex)
+        uses: actions/github-script@v6
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            github.issues.addComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: context.body
+            })
+            core.setFailed('PR title does not match the required format.')

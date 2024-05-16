@@ -1,0 +1,28 @@
+name: Enforce Pull Request on Main
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  check-push-to-main:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Check for direct push to main
+        run: |
+          git fetch origin main:main
+          if [[ $(git rev-parse HEAD) == $(git rev-parse origin/main) ]]; then
+            echo "Hey there! Pushing directly to the 'main' branch isn't recommended."
+            echo "**Consider creating a pull request instead!** ➡️"
+            echo "This allows for code review and collaboration before merging."
+            echo "Here's how:  "
+            echo "1. Create a new branch from 'main'."
+            echo "2. Make your changes on the new branch."
+            echo "3. Push the branch to your remote repository."
+            echo "4. Create a pull request from your new branch to 'main'."
+            echo "Let's keep the 'main' branch stable and reviewed! "
+            exit 1  # Exit with non-zero code to indicate failure
+          fi
+
