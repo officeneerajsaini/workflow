@@ -8,28 +8,25 @@ jobs:
   greet:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/github-script@v4
+      - name: Greet User on First PR Merge
+        uses: actions/github-script@v4
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
             const prNumber = context.payload.pull_request.number;
             const authorLogin = context.payload.pull_request.user.login;
 
-            const firstPR = await github.issues.listForRepo({
+            const { data: pullRequests } = await github.rest.pulls.list({
               owner: context.repo.owner,
               repo: context.repo.repo,
-              pull_requests: {
-                state: 'closed',
-                author: authorLogin,
-              },
+              state: 'closed',
+              author: authorLogin
             });
-            
-            console.log(firstPR.data.length); 
 
-            if (firstPR.data.length === 1) {
-              const greetingMessage = ` Congratulations, @${authorLogin} for your first pull request merge in this repository! 🎉🎉. Thanks for your contribution to JSON Schema! `;
+            if (pullRequests.length === 1) {
+              const greetingMessage = `Congratulations, @${authorLogin} for your first pull request merge in this repository! 🎉🎉. Thanks for your contribution to JSON Schema!`;
 
-              await github.issues.createComment({
+              await github.rest.issues.createComment({
                 owner: context.repo.owner,
                 repo: context.repo.repo,
                 issue_number: prNumber,
