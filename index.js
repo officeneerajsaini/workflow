@@ -1,5 +1,3 @@
 
-var n=1;
-
-hello world
-
+var n=1
+1234
