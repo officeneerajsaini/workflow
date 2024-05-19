@@ -1,14 +1,7 @@
-## 📝 Pull Request
-
-**Description:** Submit a pull request to contribute to the project.
-
-**Title:** [PR]: 
-
-**Labels:** PR
-
-### PR Title
-A short, descriptive title for your pull request.
-
+---
+title: '📝[PR]: '
+labels: '📝 PR'
+---
 ### Description
 A clear and concise description of what the PR does.
 - This PR does the following:
@@ -22,7 +15,7 @@ This helps to automatically close related issues when the PR is merged.
 - Placeholder: "Fixes #123"
 
 ### Changes
-A detailed list of the changes made in this PR.
+List the detailed changes made in this PR.
 - Added a new feature to ...
 - Refactored the ...
 - Fixed a bug in ...
@@ -42,8 +35,8 @@ Any additional context or information that reviewers should be aware of.
 - This PR is based on the following...
 
 ### Checklist
-Ensure all the items are checked before submitting. Yes for fill [x] inside brackets and No for No empty [ ]
+Make sure to check off all the items before submitting. Mark with [x] if done.
 - [ ] I have performed a self-review of my code
 - [ ] I have commented my code, particularly in hard-to-understand areas
-- [ ] I have made corresponding changes to the documentation
 - [ ] My changes generate no new warnings
+- [ ] I am working on this issue under GSSOC
