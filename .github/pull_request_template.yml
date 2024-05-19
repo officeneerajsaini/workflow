@@ -1,0 +1,78 @@
+---
+name: 📝 Pull Request
+description: Submit a pull request to contribute to the project
+title: "[PR]: "
+labels: "PR"
+body:
+  - type: input
+    attributes:
+      label: PR Title
+      description: A short, descriptive title for your pull request
+    validations:
+      required: true
+
+  - type: textarea
+    attributes:
+      label: Description
+      description: A clear and concise description of what the PR does
+      placeholder: |
+        This PR does the following:
+        - Adds ...
+        - Fixes ...
+        - Updates ...
+    validations:
+      required: true
+
+  - type: textarea
+    attributes:
+      label: Related Issues
+      description: |
+        Link any related issues using the format `Fixes #issue_number`. 
+        This helps to automatically close related issues when the PR is merged.
+      placeholder: "Fixes #123"
+    validations:
+      required: true
+
+  - type: textarea
+    attributes:
+      label: Changes
+      description: A detailed list of the changes made in this PR
+      placeholder: |
+        - Added a new feature to ...
+        - Refactored the ...
+        - Fixed a bug in ...
+    validations:
+      required: false
+
+
+  - type: textarea
+    attributes:
+      label: Screenshots (if applicable)
+      description: Add any screenshots that help explain or visualize the changes.
+    validations:
+      required: false
+
+  - type: textarea
+    attributes:
+      label: Additional Context
+      description: |
+        Any additional context or information that reviewers should be aware of.
+      placeholder: |
+        This PR is based on the following...
+    validations:
+      required: false
+
+  - type: checkboxes
+    attributes:
+      label: Checklist
+      description: Ensure all the items are checked before submitting.
+      options:
+        - label: I have performed a self-review of my code
+          required: true
+        - label: I have commented my code, particularly in hard-to-understand areas
+          required: true
+        - label: I have made corresponding changes to the documentation
+          required: false
+        - label: My changes generate no new warnings
+          required: true
+
