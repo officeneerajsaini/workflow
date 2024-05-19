@@ -1,7 +1,3 @@
----
-title: '📝[PR]: '
-labels: '📝 PR'
----
 ### Description
 A clear and concise description of what the PR does.
 - This PR does the following:
